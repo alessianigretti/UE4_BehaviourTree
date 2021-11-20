@@ -18,9 +18,7 @@ void UBehaviourTree::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UBT_TreeBuilder* tree = NewObject<UBT_TreeBuilder>();
-	tree->BuildTree();
-	tree->Run();
+	RunTree();
 }
 
 
@@ -30,3 +28,21 @@ void UBehaviourTree::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
+#if WITH_EDITOR
+void UBehaviourTree::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	FName PropertyName = (PropertyChangedEvent.Property != NULL) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(UBehaviourTree, Input)) || (PropertyName == GET_MEMBER_NAME_CHECKED(UBehaviourTree, Input)))
+	{
+		RunTree();
+	}
+}
+#endif
+
+void UBehaviourTree::RunTree()
+{
+	UBT_TreeBuilder* tree = NewObject<UBT_TreeBuilder>();
+	tree->BuildTree(Input);
+	tree->Run();
+}

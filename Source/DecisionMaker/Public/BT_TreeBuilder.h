@@ -3,8 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BT_Node.h"
+#include <vector>
 #include "UObject/NoExportTypes.h"
 #include "BT_TreeBuilder.generated.h"
+
+using namespace std;
 
 /**
  * 
@@ -15,6 +19,8 @@ class DECISIONMAKER_API UBT_TreeBuilder : public UObject
 	GENERATED_BODY()
 	
 public:
-	void BuildTree();
+	vector<UBT_Node*> nodes;
+
+	void BuildTree(float input);
 	void Run();
 };

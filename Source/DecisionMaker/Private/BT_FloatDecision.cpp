@@ -14,3 +14,8 @@ UBT_Node* UBT_FloatDecision::GetBranch()
 		return falseNode;
 	}
 }
+
+UBT_Node* UBT_FloatDecision::MakeDecision()
+{
+	return GetBranch()->MakeDecision();
+}

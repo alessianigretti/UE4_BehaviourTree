@@ -19,5 +19,6 @@ public:
 	float maxValue;
 
 protected:
-	UBT_Node* GetBranch() override;
+	virtual UBT_Node* GetBranch() override;
+	virtual UBT_Node* MakeDecision() override;
 };
